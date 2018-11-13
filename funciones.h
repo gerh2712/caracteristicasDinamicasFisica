@@ -73,6 +73,7 @@ float promedio(float arreglo[], int arrSize);
 /*    Funciones   */
 
 //Llena una matriz según el número de valores patrones y valores leídos por patrón
+//TODO: llenar una matriz de nxn con variables en sus argumentos
 float llenarMatriz(int numVP, int numVL){
       
 }

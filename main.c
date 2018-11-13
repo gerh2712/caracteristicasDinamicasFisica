@@ -4,7 +4,7 @@
 #include    <string.h>
 #include    <ctype.h>
 #include    <math.h>
-//#include    "funciones.h"
+#include    "funciones.h"
 
 int main()
 {
@@ -87,8 +87,17 @@ int main()
     system("cls");
     do
     {           
-        printf("\n\n¿Qué quieres obtener?");
+        printf("\n\n¿Qué quieres obtener?\n\n");
+        printf("\n");
+        printf("\n\ta) Promedio (Valores leídos) - Porcentaje de Error de Exactitud - Porcentaje de Exactitud");
+        printf("\n\tb) Promedio (Valores leídos) - Porcentaje de Error de Precisión - Porcentaje de Precisión");
+        printf("\n\tc) Sensibilidad del instrumento");
+        printf("\n\td) Error aleatorio - Incertidumbre");
+        printf("\n\n");
+        
+        while(getchar()!='\n');
         scanf("%c", &menu);
+        menu = toupper(menu);
         
         switch (menu)
         {

@@ -6,10 +6,15 @@
 #include    <math.h>
 #include    "funciones.h"
 
+//Variables Globales
+
+
+//Prototipo de funciones
+
 int main()
 {
     int numVP, numVL;
-    //float matrizValores[numVP][numVL];
+    float vP[numVP], vL[numVL];
     char datosCorrectos, menu;
     
     //Bienvenida    
@@ -81,6 +86,8 @@ int main()
         }
 
     } while (datosCorrectos!='S');
+
+    //Llena la matriz de los datos 
     
 
     //Muestra un menú para que el usuario escoga qué quiere obtener
@@ -136,3 +143,8 @@ int main()
     
     return 0;
 }
+
+/*  Funciones   */
+
+//Realiza el porcentaje de error
+

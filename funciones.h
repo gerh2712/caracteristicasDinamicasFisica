@@ -65,7 +65,7 @@ INCERTIDUMBRE
 /*    Prototipo de funciones  */
 
 //Obtener un promedio
-float llenarMatriz(int numVP, int numVL);
+float llenarMatriz(float vP[], int numVP, float vL[], int numVL);
 float promedio(float arreglo[], int arrSize);
 
 
@@ -73,8 +73,14 @@ float promedio(float arreglo[], int arrSize);
 /*    Funciones   */
 
 //Llena una matriz según el número de valores patrones y valores leídos por patrón
-//TODO: llenar una matriz de nxn con variables en sus argumentos
-float llenarMatriz(int numVP, int numVL){
+float llenarMatriz(float vP[], int numVP, float vL[], int numVL){
+      int i, j; 
+
+      for(i=0; i<numVP; i++){
+            printf("\n\nIntroduzca su valor patrón [i]");
+            scanf("%f", vP[i]);
+            //for()
+      }
       
 }
 

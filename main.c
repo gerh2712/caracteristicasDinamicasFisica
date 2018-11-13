@@ -146,5 +146,5 @@ int main()
 
 /*  Funciones   */
 
-//Realiza el porcentaje de error
+
 

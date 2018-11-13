@@ -64,6 +64,7 @@ INCERTIDUMBRE
 
 /*    Prototipo de funciones  */
 void llenarArreglo(float arreglo[], int arregloSize);
+void mostrarArreglo(float arreglo[],int arregloSize);
 
 /*    Funciones   */
 
@@ -81,8 +82,8 @@ void llenarArreglo(float arreglo[], int arregloSize){
 //Muestra el arreglo
 void mostrarArreglo(float arreglo[], int arregloSize){
       int i;
-
+      
       for(i=0; i<arregloSize; i++){
-            printf("\n\nEl valor patrón [%i] es: %f", i+1, arreglo[i]);
+            printf("\n\nEl valor patrón [%i] es: %.2f", i+1, arreglo[i]);
       }
 }

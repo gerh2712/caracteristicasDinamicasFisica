@@ -80,10 +80,7 @@ int main()
     } while (datosCorrectos!='S');
     
     
-    system("cls");            
-                
-
-        
+    system("cls");           
     
 
     //Muestra un menú para que el usuario escoga qué quiere obtener

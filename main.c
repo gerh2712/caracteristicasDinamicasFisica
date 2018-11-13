@@ -13,8 +13,11 @@
 
 int main()
 {
+    //Con estos define se puede ampliar la capacidad máxima del arreglo 
+    #define vP 250 
+    #define vL 250
     int numVP, numVL;
-    float vP[numVP], vL[numVL];
+    float matrizValores[vP][vL];
     char datosCorrectos, menu;
     
     //Bienvenida    
@@ -36,7 +39,7 @@ int main()
         //Obtine el número de patrones y lecturas y verifica que sean mayores a cero
         do
         {
-            printf("\n\nNecesitamos saber cuántos valores patrones y cuántos valores introducidos vas introducir");
+            printf("\n\nNecesitamos saber cuántos valores patrones y cuántos valores introducidos vas introducir, máximo %i de valores patrón y %i de valores leídos por cada valor patrón", vP, vL);
             printf("\n\n\tNOTA: Será el mismo número de valores leídos para TODOS los valores patrones");
 
             printf("\n\nIntroduce el número de valores PATRÓN que vas a utilizar: ");
@@ -47,12 +50,12 @@ int main()
 
             system("cls");
 
-            if(numVP<=0 || numVL<=0){
+            if(numVP<=0 || numVL<=0 || numVP>250 || numVL>250){
 
                 printf("\n\nTus valores son inválidos: ");
                 printf("\n\n\t#Patrones: %i", numVP);
                 printf("\n\n\t#Leídos: %i", numVL);
-                printf("\n\nIntroduce valores mayores a cero");
+                printf("\n\nIntroduce valores en el rango permitido: 0 - %i o %i", vP, vL);
 
             }
 
@@ -88,7 +91,7 @@ int main()
     } while (datosCorrectos!='S');
 
     //Llena la matriz de los datos 
-    
+    llenarMatriz(matrizValores, vP, numVP, numVL);
 
     //Muestra un menú para que el usuario escoga qué quiere obtener
     system("cls");
@@ -96,10 +99,10 @@ int main()
     {           
         printf("\n\n¿Qué quieres obtener?\n\n");
         printf("\n");
-        printf("\n\ta) Promedio (Valores leídos) - Porcentaje de Error de Exactitud - Porcentaje de Exactitud");
-        printf("\n\tb) Promedio (Valores leídos) - Porcentaje de Error de Precisión - Porcentaje de Precisión");
-        printf("\n\tc) Sensibilidad del instrumento");
-        printf("\n\td) Error aleatorio - Incertidumbre");
+        printf("\n\n\ta) Promedio (Valores leídos) - Porcentaje de Error de Exactitud - Porcentaje de Exactitud");
+        printf("\n\n\tb) Promedio (Valores leídos) - Porcentaje de Error de Precisión - Porcentaje de Precisión");
+        printf("\n\n\tc) Sensibilidad del instrumento");
+        printf("\n\n\td) Error aleatorio - Incertidumbre");
         printf("\n\n");
         
         while(getchar()!='\n');

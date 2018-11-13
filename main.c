@@ -10,7 +10,7 @@ int main()
 {
     int numVP, numVL;
     //float matrizValores[numVP][numVL];
-    char datosCorrectos;
+    char datosCorrectos, menu;
     
     //Bienvenida    
     printf("\nPrograma que determina las características dinámicas de un instrumento.");
@@ -54,8 +54,6 @@ int main()
         } while (numVP<=0 || numVL<=0);
                 
 
-
-
         //Corrobora si los datos introducidos son los que el usuario desea
         do
         {
@@ -83,6 +81,40 @@ int main()
         }
 
     } while (datosCorrectos!='S');
+    
+
+    //Muestra un menú para que el usuario escoga qué quiere obtener
+    
+    do
+    {
+        
+        switch (menu)
+        {
+            case 'A':
+                //Porcentaje de Error de Exactitud 
+                //Porcentaje de Exactitud
+                break;
+
+            case 'B':
+                //Porcentaje de Error de Precisión
+                //Porcentaje de Precisión
+                break;
+
+            case 'C':
+                //Sensibilidad
+                break;
+
+            case 'D':
+                //Error Aleatorio
+                //Incertidumbre
+                break;
+        
+            default:
+                break;
+        }
+        
+
+    } while (menu!='A' && menu!='B' && menu!='C' && menu!='D');
     
 
 

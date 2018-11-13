@@ -63,42 +63,26 @@ INCERTIDUMBRE
 */
 
 /*    Prototipo de funciones  */
-#define vL 250 //Se tiene que modificar para que coincida con el main
-
-//Obtener un promedio
-void llenarMatriz(float matrizValores[][vL], int vP, int numVP, int numVL);
-float promedio(float arreglo[], int arrSize);
-
-
+void llenarArreglo(float arreglo[], int arregloSize);
 
 /*    Funciones   */
 
-//Llena una matriz según el número de valores patrones y valores leídos por patrón
-void llenarMatriz(float matrizValores[][vL], int vP, int numVP, int numVL){
-      int i, j; 
-      numVL++;
-
-      for(i=0; i<numVP; i++){ 
-            printf("\n\nIntroduce tu valor patrón [%i]: ", i+1);
-            scanf("%f", &matrizValores[i][0]);           
-      }     
-      for(j=1; i<numVL; j++){ 
-            printf("\n\nIntroduce tu valor leído [%i] para el valor patrón [%i]: ", i+1);
-            scanf("%f", &matrizValores[i][0]);           
-      }     
-}
-
-//Obtener un promedio
-float promedio(float arreglo[], int arrSize){
-      float promedio = 0;
+//Llena un arreglo de patrones
+void llenarArreglo(float arreglo[], int arregloSize){
       int i;
 
-      for(i=0; i<arrSize; i++){
-            promedio+= arreglo[i];
+      for(i=0; i<arregloSize; i++){
+            printf("\n\nIntroduce el valor patron [%i]", i+1);
+            scanf("%f", &arreglo[i]);
       }
 
-      promedio=promedio/arrSize;
+}
 
-      return promedio;
+//Muestra el arreglo
+void mostrarArreglo(float arreglo[], int arregloSize){
+      int i;
 
+      for(i=0; i<arregloSize; i++){
+            printf("\n\nEl valor patrón [%i] es: %f", i+1, arreglo[i]);
+      }
 }

@@ -16,8 +16,8 @@ int main()
     //Con estos define se puede ampliar la capacidad máxima del arreglo 
     #define vP 250 
     #define vL 250
-    int numVP, numVL;
-    float matrizValores[vP][vL];
+    int numVP, numVL, i, j, k;
+    float arregloVP[vP], arregloVL[vL], arregloComodin[vP];
     char datosCorrectos, menu;
     
     //Bienvenida    
@@ -27,71 +27,64 @@ int main()
     printf("\n\t\tMoreno Peralta Ángel Eduardo");
     printf("\n\t\tBueno Hernández Jorge Gerardo ");
     printf("\n\t\tBueno Hernández Jorge Gerardo ");
-    printf("\n\t\tBueno Hernández Jorge Gerardo ");
-    printf("\n\nPara comenzar presione enter...\n\n\n");
+    printf("\n\t\tBueno Hernández Jorge Gerardo \n\n");
     system("pause");
     system("cls");
 
-    //Obtiene el número de valores patrón y leídos por patrón (el mismo para todos)
+        
+    //Obtine el número de patrones y lecturas y verifica que sean mayores a cero
+    
+    printf("\n\nNecesitamos saber cuántos valores patrones y cuántos valores leídos vas a introducir, máximo %i de valores patrón y %i de valores leídos por cada valor patrón", vP, vL);
+
+    //Verifica que el valor introducido sea mayor a cero 
+    do{
+        printf("\n\nIntroduce el número de valores PATRÓN que vas a utilizar: ");
+        scanf("%i", &numVP);
+        if(numVP<=0){
+            system("cls");
+            printf("\nERROR: Introduce un valor mayor a cero");
+        }
+    } while (numVP<=0);
+
+    //Obtiene y corrobora que los valores patrón sean correctos
     do
     {
-        
-        //Obtine el número de patrones y lecturas y verifica que sean mayores a cero
+        //Llena el arreglo de valores patrón
+        llenarArreglo(arregloVP, numVP);
+
+        //Recorre el arreglo
+        mostrarArreglo(arregloVP, numVP);        
+
+        //Veirifica que la opción sea válida
         do
         {
-            printf("\n\nNecesitamos saber cuántos valores patrones y cuántos valores introducidos vas introducir, máximo %i de valores patrón y %i de valores leídos por cada valor patrón", vP, vL);
-            printf("\n\n\tNOTA: Será el mismo número de valores leídos para TODOS los valores patrones");
-
-            printf("\n\nIntroduce el número de valores PATRÓN que vas a utilizar: ");
-            scanf("%i", &numVP);
-
-            printf("\n\nIntroduce el número de valores LEÍDOS que vas a utilizar: ");
-            scanf("%i", &numVL);
-
-            system("cls");
-
-            if(numVP<=0 || numVL<=0 || numVP>250 || numVL>250){
-
-                printf("\n\nTus valores son inválidos: ");
-                printf("\n\n\t#Patrones: %i", numVP);
-                printf("\n\n\t#Leídos: %i", numVL);
-                printf("\n\nIntroduce valores en el rango permitido: 0 - %i o %i", vP, vL);
-
-            }
-
-        } while (numVP<=0 || numVL<=0);
-                
-
-        //Corrobora si los datos introducidos son los que el usuario desea
-        do
-        {
-            printf("\n\n¿Los datos son correctos?: ");
-            printf("\n\n\t#Patrones: %i", numVP);
-            printf("\n\n\t#Leídos: %i", numVL);
-
-            printf("\n\nS)Sí \tN)No\n\n");
+            printf("\n\n¿Los valores son correctos?");
+            printf("\n\nS)Sí\tN)No\n\n");
             printf("\n(Introduce S o N):  "); 
-
             while(getchar()!='\n');
             scanf("%c", &datosCorrectos);
             datosCorrectos = toupper(datosCorrectos);
 
             if(datosCorrectos!='S' && datosCorrectos!='N'){
                 system("cls");
-                printf("\n\nPor favor, introduce una opción válida");
+                printf("\n\nIntroduce una opción válida");
             }
 
         } while (datosCorrectos!='S' && datosCorrectos!='N');
-        
+
         if(datosCorrectos=='N'){
             system("cls");
             printf("\n\nTe volveremos a preguntar los datos");
         }
 
     } while (datosCorrectos!='S');
+    
+    
+    system("cls");            
+                
 
-    //Llena la matriz de los datos 
-    llenarMatriz(matrizValores, vP, numVP, numVL);
+        
+    
 
     //Muestra un menú para que el usuario escoga qué quiere obtener
     system("cls");
@@ -146,8 +139,4 @@ int main()
     
     return 0;
 }
-
-/*  Funciones   */
-
-
 

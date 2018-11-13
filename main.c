@@ -4,16 +4,15 @@
 #include    <string.h>
 #include    <ctype.h>
 #include    <math.h>
-#include    "funciones.h"
+//#include    "funciones.h"
 
-int main(void)
+int main()
 {
     int numVP, numVL;
-    float matrizValores[numVP][numVL];
+    //float matrizValores[numVP][numVL];
     char datosCorrectos;
     
-    //Bienvenida
-    system("cls");
+    //Bienvenida    
     printf("\nPrograma que determina las características dinámicas de un instrumento.");
     printf("\n\tRealizado por: ");
     printf("\n\t\tBueno Hernández Jorge Gerardo");
@@ -23,6 +22,7 @@ int main(void)
     printf("\n\t\tBueno Hernández Jorge Gerardo ");
     printf("\n\nPara comenzar presione enter...\n\n\n");
     system("pause");
+    system("cls");
 
     //Obtiene el número de valores patrón y leídos por patrón (el mismo para todos)
     do
@@ -63,18 +63,19 @@ int main(void)
             printf("\n\n\t#Patrones: %i", numVP);
             printf("\n\n\t#Leídos: %i", numVL);
 
-            printf("\n\nS)Sí \tN)No");
-            printf("\n(Introduce S o N)");
-            fflush(stdin);
-            scanf("%c", &datosCorrectos);
-            datosCorrectos= toupper(datosCorrectos);
+            printf("\n\nS)Sí \tN)No\n\n");
+            printf("\n(Introduce S o N):  "); 
 
-            if(datosCorrectos!='S' || datosCorrectos!='N'){
+            while(getchar()!='\n');
+            scanf("%c", &datosCorrectos);
+            datosCorrectos = toupper(datosCorrectos);
+
+            if(datosCorrectos!='S' && datosCorrectos!='N'){
                 system("cls");
-                printf("\n\nPor favor, introduce una opción válida\n\n");
+                printf("\n\nPor favor, introduce una opción válida");
             }
 
-        } while (datosCorrectos!='S' || datosCorrectos!='N');
+        } while (datosCorrectos!='S' && datosCorrectos!='N');
         
         if(datosCorrectos=='N'){
             system("cls");

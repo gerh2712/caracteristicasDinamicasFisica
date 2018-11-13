@@ -14,7 +14,7 @@ int main()
     
     //Bienvenida    
     printf("\nPrograma que determina las características dinámicas de un instrumento.");
-    printf("\n\tRealizado por: ");
+    printf("\n\tRealizado por la Brigada #4: ");
     printf("\n\t\tBueno Hernández Jorge Gerardo");
     printf("\n\t\tMoreno Peralta Ángel Eduardo");
     printf("\n\t\tBueno Hernández Jorge Gerardo ");
@@ -84,18 +84,22 @@ int main()
     
 
     //Muestra un menú para que el usuario escoga qué quiere obtener
-    
+    system("cls");
     do
-    {
+    {           
+        printf("\n\n¿Qué quieres obtener?");
+        scanf("%c", &menu);
         
         switch (menu)
         {
             case 'A':
+                //promedio
                 //Porcentaje de Error de Exactitud 
                 //Porcentaje de Exactitud
                 break;
 
             case 'B':
+                //promedio
                 //Porcentaje de Error de Precisión
                 //Porcentaje de Precisión
                 break;
@@ -110,6 +114,8 @@ int main()
                 break;
         
             default:
+                system("cls");
+                printf("\n\nPor favor, introduce una opción válida");
                 break;
         }
         

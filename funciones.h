@@ -96,23 +96,7 @@ void llenarArreglo(float arreglo[], int arregloSize){
 
 }
 
-//Muestra el arreglo
-void mostrarArreglo(float arreglo[], int arregloSize, char variosV, char tipoValor[50], char lecturaValor[50]){
-      int i;
 
-      if(variosV=="S"){
-            ;
-      }else if(variosV=="N"){
-                  printf("\n\n\t_________________________________________");
-                  printf("\n\n\t|   Valor %c      |     Es igual a      |");
-            for(i=0; i<arregloSize; i++){
-                  printf("\n\n\t_________________________________________");
-                  printf("\n\n\t|   Valor %c [%i]     |     %.2f");
-            }
-                  printf("\n\n\t_________________________________________");
-
-      }
-}
 float promedio(float arregloLecturas[],int lecturasSize){
       int i,cntCal=0;
 	float promedio;
@@ -127,12 +111,19 @@ float promedio(float arregloLecturas[],int lecturasSize){
 //%EP= |(Vl-Vla)/Vl| * 100
 //%E= 100% - %EE
 //%P= 100% -$EP
-/*
-int Exactitud(float arregloPatron[],int patronSize, float arregloLecturas[],int lecturasSize){
-      float errorExactitud[100];
+
+void Exactitud(float arregloPatron[],int patronSize, float arregloLecturas[],int lecturasSize){
+      float errorExactitud[100],exactitud[100];
       int i;
       for(i=0;i<patronSize;i++){          
-            errorExactitud[i]=((arregloPatron[i]-(promedio( arregloLecturas, lecturasSize)))/);
+            errorExactitud[i]=((arregloPatron[i]-(promedio( arregloLecturas, lecturasSize)))/arregloPatron[i]);
+            if(errorExactitud[i]<0){
+                  errorExactitud[i]= errorExactitud[i]*(-100);
+            }else{
+                  errorExactitud[i] = errorExactitud[i]*(100);
+            }
+            exactitud[i]= 100 - errorExactitud[i];
+            printf("\nEl Porcentaje de Exactitud del Valor Patron %.2f es %.2f",arregloPatron[i],exactitud[i]);
       }
       
-} */
+} 

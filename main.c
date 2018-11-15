@@ -54,11 +54,13 @@ int main()
 
         case 'A':
             bienvenida();
+            return(main());
             break;
         
         case 'B':            
             nuevaConsulta();
             contaConsultas++;
+            return(main());
             break;
 
         case 'C':       
@@ -72,13 +74,15 @@ int main()
             }
             break;
 
-        case 'D':            
+        case 'D':    
+            printf("\n\n");
             exit(0);
             break;
 
         default:
             system(cleanScreen);
             printf("\n\nEscoge una opción válida (a - b - c - d)");
+            return(main());
             break;
 
         }

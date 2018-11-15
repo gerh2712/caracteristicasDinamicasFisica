@@ -8,14 +8,6 @@
 #include    "funciones.h"
 
 //Variables Globales
-
-
-//Prototipo de funciones
-
-int main()
-{
-    setlocale(LC_CTYPE, "Spanish");
-
     #define cleanScreen "cls"
     //El número de vP y vL debe de coincidir
     #define vP 100
@@ -23,8 +15,92 @@ int main()
     #define lPP 100
 
     float mVP[vP], mVL[vL], mlPP[lPP];
-    int numVP, numlPP, i; 
+    int numVP, numlPP, i, contaConsultas=0, contaMenu=0; 
     char vCorrectos;
+
+
+//Prototipo de funciones
+void nuevaConsulta(void);
+
+
+int main()
+{
+    setlocale(LC_CTYPE, "Spanish");
+
+    char menu;
+
+    system(cleanScreen);
+    
+    if(contaMenu>0){
+        ;
+    }else {
+        bienvenida();
+    }
+
+    
+    do
+    {
+        contaMenu++;
+        printf("\n\n¿Qué quieres hacer?");
+        printf("\n\n\ta)Mostrar datos de la Brigada #4");
+        printf("\n\n\tb)Realizar una nueva consulta");
+        printf("\n\n\tc)Mostrar los últimos datos");
+        printf("\n\n\td)Salir del programa");
+        printf("\n\n\tIntroduce una opción: ");
+        scanf("%c", &menu);
+        menu = toupper(menu);
+
+        switch(menu){
+
+        case 'A':
+            bienvenida();
+            break;
+        
+        case 'B':            
+            nuevaConsulta();
+            contaConsultas++;
+            break;
+
+        case 'C':       
+            system(cleanScreen);
+            if(contaConsultas>0){
+
+            }else {
+                printf("\n\nParece que no has hecho ninguna consulta anteriormente, intenta a realizar una consulta antes\n\n");
+                system("pause");
+                return(main());
+            }
+            break;
+
+        case 'D':            
+            exit(0);
+            break;
+
+        default:
+            system(cleanScreen);
+            printf("\n\nEscoge una opción válida (a - b - c - d)");
+            break;
+
+        }
+
+    } while (menu!='A' && menu!='B');
+    
+
+    
+
+    
+    
+
+
+    
+    return 0;
+}
+
+
+/*  Funciones   */
+
+//Ejecuta el programa completo
+void nuevaConsulta(void){
 
     //Bienvenida   
     bienvenida();
@@ -35,7 +111,7 @@ int main()
     system("pause");
     system(cleanScreen);
 
-    //Pide los valores patrón
+    //Pide la cantidad de valores patrón
     do
     {
         printf("\n\n\tIntroduce cuántos valores patrón vas a utilizar (0-50): ");
@@ -88,12 +164,8 @@ int main()
         
 
     } while (vCorrectos=='N');
-    
+    vCorrectos = 'N';
 
 
-    
-    return 0;
 }
-
-
 

@@ -128,7 +128,11 @@ float promedio(float arregloLecturas[],int lecturasSize){
 //%E= 100% - %EE
 //%P= 100% -$EP
 /*
-int errorExactitud(float arregloPatron[],int patronSize, float promedio(float arregloLecturas[],int lecturasSize)){
-      float errorExactitud;
-      errorExactitud=((promedio(arregloLecturas[],lecturasSize)-))
+int Exactitud(float arregloPatron[],int patronSize, float arregloLecturas[],int lecturasSize){
+      float errorExactitud[100];
+      int i;
+      for(i=0;i<patronSize;i++){          
+            errorExactitud[i]=((arregloPatron[i]-(promedio( arregloLecturas, lecturasSize)))/);
+      }
+      
 } */

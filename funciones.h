@@ -148,8 +148,8 @@ float cuadrado(float arregloSumatoria[],int sumatoriaSize){
 
 //Obtiene el promedio de varias lecturas
 float promedio(float arregloLecturas[],int lecturasSize){
-      int i,cntCal=0;
-	float promedio;
+      int i;
+	float promedio,cntCal=0.0;
 	for(i=0;i<lecturasSize;i++){
 		cntCal+=arregloLecturas[i];
 	}
@@ -161,21 +161,25 @@ float promedio(float arregloLecturas[],int lecturasSize){
 float valorAlejado(float arregloLecturas[],int lecturasSize){
       float diferencia[100],diferen=0,valorA=0;
       int i;
-      for(i=0;i<lecturasSize;i++){
-            valorA= arregloLecturas[0];
-            diferen=arregloLecturas[i]-promedio(arregloLecturas,lecturasSize);
-            if(diferen<0){
-                  diferen = diferen*-1;
-            }
-            diferencia[i]=diferen;
-      }
       
       for(i=0;i<lecturasSize;i++){
-            if(diferencia[i]>valorA){
-                valorA = diferencia[i];  
+      
+            diferen = fabs(arregloLecturas[i] - promedio(arregloLecturas,lecturasSize));
+      
+            diferencia[i]=diferen;
+      }
+
+      valorA= diferencia[0];
+
+      for(i=0; i<lecturasSize; i++){
+
+            if(diferencia[i]>=valorA){
+                  valorA = arregloLecturas[i];
             }
 
       }
+      
+    
       return valorA;
       
 }

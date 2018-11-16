@@ -90,13 +90,13 @@ void llenarArreglo(float arreglo[], int arregloSize){
       int i;
 
       for(i=0; i<arregloSize; i++){
-            printf("\n\nIntroduce el valor patron [%i]:     ", i+1);
+            printf("\n\nIntroduce el valor [%i]:     ", i+1);
             scanf("%f", &arreglo[i]);
       }
 
 }
 
-
+//Obtiene el promedio de varias lecturas
 float promedio(float arregloLecturas[],int lecturasSize){
       int i,cntCal=0;
 	float promedio;
@@ -105,6 +105,28 @@ float promedio(float arregloLecturas[],int lecturasSize){
 	}
 	promedio = cntCal/lecturasSize +.0;
 	return promedio;
+}
+
+//Obtiene el valor más alejado
+float valorAlejado(float arregloLecturas[],int lecturasSize){
+      float diferencia[100],diferen=0,valorA=0;
+      int i;
+      for(i=0;i<lecturasSize;i++){
+            diferen=arregloLecturas[i]-promedio(arregloLecturas,lecturasSize);
+            if(diferen<0){
+                  diferen = diferen*-1;
+            }
+            diferencia[i]=diferen;
+      }
+      
+      for(i=0;i<lecturasSize;i++){
+            if(diferencia[i]>valorA){
+                valorA = diferencia[i];  
+            }
+
+      }
+      return valorA;
+      
 }
 //Calcula el error de exactitud
 //%EE= |(Vp-Vl)/Vp| * 100
@@ -127,3 +149,18 @@ void Exactitud(float arregloPatron[],int patronSize, float arregloLecturas[],int
       }
       
 } 
+
+void Precision(float arregloPatron[],int patronSize,float arregloLecturas[],int lecturasSize){
+      float errorPrecision[100],precision[100];
+      int i;
+      for(i=0;i<patronSize;i++){
+            errorPrecision[i]=((arregloLecturas[i]-valorAlejado(arregloLecturas, lecturasSize))/arregloLecturas[i]);
+            if(errorPrecision[i]<0){
+                  errorPrecision[i]=errorPrecision[i]*-100;
+            }else{
+                  errorPrecision[i]=errorPrecision[i]*100;
+            }
+            precision[i]= 100 - errorPrecision[i];
+            printf("\nEl porcentaje de Precision del Valor Patron %.2f es %.2f. ",arregloPatron[i],precision[i]);
+      }
+}

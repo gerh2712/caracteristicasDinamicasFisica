@@ -284,6 +284,13 @@ void nuevaConsulta(void){
     }
     printf("\n\n");
 
+    //Modelo Matemático
+    system(cleanScreen);
+    printf("\n\nA continuación te mostraremos un modelo matemático como el siguiente: ");
+    printf("\n\n\ty = mx + b");
+    printf("\n\n\t\tDonde m = pendiente = sensibilidad");
+    printf("\n\n\t\tDonde b = ordenada al origen = erro aleatorio o experimental (+ -) ");
+
     system("pause");
 
 

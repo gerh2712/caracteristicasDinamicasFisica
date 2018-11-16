@@ -102,6 +102,26 @@ void llenarArreglo(float arreglo[], int arregloSize){
       }
 
 }
+//Calculo de incertidumbre.
+float varianza(float arregloLecturas[],int lecturasSize,float promedio){
+	int i;
+	float varianza,numVarianza;
+	for(i=0;i<lecturasSize;i++){
+		numVarianza+=pow(arregloLecturas[i]-promedio,2);
+	}
+	varianza= numVarianza/(lecturasSize-1)+0.0;
+	return varianza;
+}
+float desviacion(float calif[],int n){
+	float desviacion;
+	desviacion = sqrt(varianza(calif,n));
+	return desviacion;
+}
+float incertidumbre(float calif[],int n){
+	float incertidumbre;
+	incertidumbre = (desviacion(calif,n))/(sqrt(n))+0.0;
+	return incertidumbre;
+}
 //Obtiene la pendiente
 float pendiente(float arregloX[],float arregloY[],int sumatoriaSize){
       float sumatoriaX,sumatoriaY,sumatoriaXY,sumatoriaX2,pendiente=0;
@@ -130,14 +150,16 @@ float sumatoria(float arregloSumatoria[],int sumatoriaSize){
       for(i=0;i<sumatoriaSize;i++){
             cntSumatoria+=arregloSumatoria[i];
       }
+      return cntSumatoria;
 }
 //Obtiene el producto de xy
 float producto(float arregloX[],float arregloY[],int sumatoriaSize){
       int i;
       float cntSumatoria=0.0;
       for(i=0;i<sumatoriaSize;i++){
-            cntSumatoria+= arregloX[i]*arregloY[i];
+            cntSumatoria+= (arregloX[i])*(arregloY[i]);
       }
+      return cntSumatoria;
 }
 //Obtiene la sumatoria de valores al cuadrado
 float cuadrado(float arregloSumatoria[],int sumatoriaSize){
@@ -146,6 +168,7 @@ float cuadrado(float arregloSumatoria[],int sumatoriaSize){
       for(i=0;i<sumatoriaSize;i++){
             cntSumatoria+= pow(arregloSumatoria[i],2);
       }
+      return cntSumatoria;
 }
 
 

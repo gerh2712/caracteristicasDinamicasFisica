@@ -63,9 +63,29 @@ int main()
             return(main());
             break;
 
-        case 'C':       
+        case 'C':   
+
             system(cleanScreen);
+
             if(contaConsultas>0){
+
+                //Te mostraremos los valores patrones y sus promedios
+                printf("\n\nTe mostraremos los último resultados");
+
+                //Muestra las matrices relacionadas VP y VLP
+                    printf("\n\nIntroduciste los siguientes valores:    ");
+                    printf("\n\n\t| Valor Patrón | Lectura Promedio | Porcentaje Exactitud | Porcentaje Presición  | Error Exactitud | Error Precision |");
+                    float patron, pPromedio, presci;
+                for(i=0; i<numVP; i++){
+                    patron = mVP[i];
+                    pPromedio = mVL[i];
+                    presci = mP[i];
+                    printf("\n\n\t| %.2f | %.2f | %.2f | %.2f | %.2f | %.2f |", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci);
+                    
+                }
+                printf("\n\n");
+
+                system("pause");
 
             }else {
                 printf("\n\nParece que no has hecho ninguna consulta anteriormente, intenta a realizar una consulta antes\n\n");
@@ -249,18 +269,20 @@ void nuevaConsulta(void){
 
 
     //Te mostraremos los valores patrones y sus promedios
-    printf("\n\nTe mostraremos los valores patrones y sus promedios");
+    printf("\n\nTe mostraremos los resultados");
 
     //Muestra las matrices relacionadas VP y VLP
         printf("\n\nIntroduciste los siguientes valores:    ");
-        printf("\n\n\t__________________________________");
-        printf("\n\n\t| Valor Patrón |     Es igual a   |");
+        printf("\n\n\t| Valor Patrón | Lectura Promedio | Porcentaje Exactitud | Porcentaje Presición  | Error Exactitud | Error Precision |");
+        float patron, pPromedio, presci, exact;
     for(i=0; i<numVP; i++){
-        printf("\n\n\t___________________________________");
-        printf("\n\n\t|     %.2f    |       %.2f        |", mVP[i], mVL[i]);
+        patron = mVP[i];
+        pPromedio = mVL[i];
+        presci = mP[i];
+        exact = Exactitud(patron, pPromedio);
+        printf("\n\n\t| %.2f | %.2f | %.2f | %.2f | %.2f | %.2f |", patron, pPromedio, exact, presci, (100 - exact), (100 - presci));
     }
-        printf("\n\n\t___________________________________");
-        printf("\n\n");
+    printf("\n\n");
 
     system("pause");
 

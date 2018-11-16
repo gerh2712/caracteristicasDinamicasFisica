@@ -66,10 +66,13 @@ INCERTIDUMBRE
 /*    Prototipo de funciones  */
 void bienvenida();
 void llenarArreglo(float arreglo[], int arregloSize);
-void mostrarArreglo(float arreglo[], int arregloSize, char variosV, char tipoValor[50], char lecturaValor[50]);
+float pendiente(float arregloX[],float arregloY[],int sumatoriaSize);
+float ordenada(float arregloX[],float arregloY[],int sumatoriaSize);
 float sumatoria(float arregloSumatoria[],int sumatoriaSize);
-float producto(float arregloX,float arregloY,int sumatoriaSize);
+float producto(float arregloX[],float arregloY[],int sumatoriaSize);
+float cuadrado(float arregloSumatoria[],int sumatoriaSize);
 float Precision(float arregloLecturas[],int lecturasSize, float promedio);
+float Exactitud(float patron, float promedio);
 
 /*    Funciones   */
 
@@ -80,10 +83,10 @@ void bienvenida(){
     printf("\n\nPrograma que determina las características dinámicas de un instrumento.");
     printf("\n\n\tRealizado por la Brigada #4: ");
     printf("\n\n\t\tBueno Hernández Jorge Gerardo");
+    printf("\n\n\t\tGarcía Figueroa Mungía Alberto");
+    printf("\n\n\t\tMartinez Olivarez Ángel");
     printf("\n\n\t\tMoreno Peralta Ángel Eduardo");
-    printf("\n\n\t\tBueno Hernández Jorge Gerardo ");
-    printf("\n\n\t\tBueno Hernández Jorge Gerardo ");
-    printf("\n\n\t\tBueno Hernández Jorge Gerardo \n\n");
+    printf("\n\n\t\tRendón Organis Homero\n\n");
     system("pause");
     system(cleanScreen);
 }
@@ -99,6 +102,24 @@ void llenarArreglo(float arreglo[], int arregloSize){
 
 }
 //Obtiene la pendiente
+float pendiente(float arregloX[],float arregloY[],int sumatoriaSize){
+      float sumatoriaX,sumatoriaY,sumatoriaXY,sumatoriaX2,pendiente=0;
+      sumatoriaX= sumatoria(arregloX, sumatoriaSize);
+      sumatoriaY= sumatoria(arregloY,sumatoriaSize);
+      sumatoriaXY= producto(arregloX,arregloY,sumatoriaSize);
+      sumatoriaX2= cuadrado(arregloX,sumatoriaSize);
+      pendiente=(((sumatoriaSize*sumatoriaXY)-(sumatoriaX*sumatoriaY))/((sumatoriaSize*sumatoriaX2)-(pow(sumatoriaX,2))));
+}
+//Obtiene la ordenada
+float ordenada(float arregloX[],float arregloY[],int sumatoriaSize){
+      float sumatoriaX,sumatoriaY,sumatoriaXY,sumatoriaX2,ordenada=0.0,m=0.0;
+      sumatoriaX= sumatoria(arregloX, sumatoriaSize);
+      sumatoriaY= sumatoria(arregloY,sumatoriaSize);
+      sumatoriaXY= producto(arregloX,arregloY,sumatoriaSize);
+      sumatoriaX2= cuadrado(arregloX,sumatoriaSize);
+      m= pendiente(arregloX,arregloY,sumatoriaSize);
+      ordenada=(((sumatoriaY)-(m*sumatoriaX))/(sumatoriaSize));
+}
 //Obtiene la sumatoria
 float sumatoria(float arregloSumatoria[],int sumatoriaSize){
       int i;
@@ -108,19 +129,19 @@ float sumatoria(float arregloSumatoria[],int sumatoriaSize){
       }
 }
 //Obtiene el producto de xy
-float producto(float arregloX,float arregloY,int sumatoriaSize){
+float producto(float arregloX[],float arregloY[],int sumatoriaSize){
       int i;
       float cntSumatoria=0.0;
       for(i=0;i<sumatoriaSize;i++){
-            cntSumatoria+= arregloX*arregloY;
+            cntSumatoria+= arregloX[i]*arregloY[i];
       }
 }
 //Obtiene la sumatoria de valores al cuadrado
-float cuadrado(float arregloSumatoria,int sumatoriaSize){
+float cuadrado(float arregloSumatoria[],int sumatoriaSize){
       int i;
       float cntSumatoria=0.0;
       for(i=0;i<sumatoriaSize;i++){
-            cntSumatoria+= arregloX*arregloY;
+            cntSumatoria+= pow(arregloSumatoria[i],2);
       }
 }
 
@@ -141,6 +162,7 @@ float valorAlejado(float arregloLecturas[],int lecturasSize){
       float diferencia[100],diferen=0,valorA=0;
       int i;
       for(i=0;i<lecturasSize;i++){
+            valorA= arregloLecturas[0];
             diferen=arregloLecturas[i]-promedio(arregloLecturas,lecturasSize);
             if(diferen<0){
                   diferen = diferen*-1;
@@ -163,19 +185,14 @@ float valorAlejado(float arregloLecturas[],int lecturasSize){
 //%E= 100% - %EE
 //%P= 100% -$EP
 
-void Exactitud(float arregloPatron[],int patronSize, float arregloLecturas[],int lecturasSize){
-      float errorExactitud[100],exactitud[100];
-      int i;
-      for(i=0;i<patronSize;i++){          
-            errorExactitud[i]=((arregloPatron[i]-(promedio( arregloLecturas, lecturasSize)))/arregloPatron[i]);
-            if(errorExactitud[i]<0){
-                  errorExactitud[i]= errorExactitud[i]*(-100);
-            }else{
-                  errorExactitud[i] = errorExactitud[i]*(100);
-            }
-            exactitud[i]= 100 - errorExactitud[i];
-            printf("\nEl Porcentaje de Exactitud del Valor Patron %.2f es %.2f",arregloPatron[i],exactitud[i]);
-      }
+float Exactitud(float patron, float promedio){
+     float exactitud;
+
+     exactitud = fabs((patron-promedio)/patron)*100;
+
+     exactitud = 100 - exactitud; 
+
+     return exactitud;
       
 } 
 
@@ -183,7 +200,7 @@ float Precision(float arregloLecturas[],int lecturasSize, float promedio){
       
       float precision;
 
-      precision = fabs(((promedio-valorAlejado(arregloLecturas, lecturasSize))/promedio)*100);
+      precision = fabs(((promedio-valorAlejado(arregloLecturas, lecturasSize))/promedio))*100;
 
       precision = 100-precision;
 

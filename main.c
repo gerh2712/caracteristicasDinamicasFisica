@@ -14,7 +14,7 @@
     #define vL 100
     #define lPP 100
 
-    float mVP[vP], mVL[vL], mlPP[lPP], prom;
+    float mVP[vP], mVL[vL], mlPP[lPP],  mP[vP], prom , pres;
     int numVP, numlPP, i, j, contaConsultas=0, contaMenu=0; 
     char vCorrectos;
 
@@ -209,7 +209,7 @@ void nuevaConsulta(void){
                 //Muestra el arreglo
                     printf("\n\nIntroduciste los siguientes valores:    ");
                     printf("\n\n\t_____________________________________");
-                    printf("\n\n\t|   Valor Patrón [%.2f] es igual a: |", mVP[i]);
+                    printf("\n\n\t|   Valor Patrón [%.2f] es igual a: |", mVP[j]);
                 for(i=0; i<numlPP; i++){
                     printf("\n\n\t_____________________________________");
                     printf("\n\n\t|               %.2f                |", mlPP[i]);
@@ -234,14 +234,20 @@ void nuevaConsulta(void){
             
 
         } while (vCorrectos=='N');
-        vCorrectos = 'N';
+
         prom = promedio(mlPP, numlPP);
+        pres = Precision(mlPP, numlPP, prom);
 
         //Llena el arreglo de lecturas promedio  por patrón
-        mVL[j] = prom;
+        mVL[j] = prom;   
+        mP[j] = pres;     
+
         system(cleanScreen);
     }
-    
+    //TODO: AQUÍ SE ROMPE
+    //Como si hiciera un return(main);
+
+
     //Te mostraremos los valores patrones y sus promedios
     printf("\n\nTe mostraremos los valores patrones y sus promedios");
 
@@ -255,6 +261,8 @@ void nuevaConsulta(void){
     }
         printf("\n\n\t___________________________________");
         printf("\n\n");
+
+    system("pause");
 
 
 

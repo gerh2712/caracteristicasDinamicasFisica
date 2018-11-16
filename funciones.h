@@ -67,6 +67,9 @@ INCERTIDUMBRE
 void bienvenida();
 void llenarArreglo(float arreglo[], int arregloSize);
 void mostrarArreglo(float arreglo[], int arregloSize, char variosV, char tipoValor[50], char lecturaValor[50]);
+float sumatoria(float arregloSumatoria[],int sumatoriaSize);
+float producto(float arregloX,float arregloY,int sumatoriaSize);
+float Precision(float arregloLecturas[],int lecturasSize, float promedio);
 
 /*    Funciones   */
 
@@ -95,13 +98,39 @@ void llenarArreglo(float arreglo[], int arregloSize){
       }
 
 }
+//Obtiene la pendiente
+//Obtiene la sumatoria
+float sumatoria(float arregloSumatoria[],int sumatoriaSize){
+      int i;
+      float cntSumatoria=0.0;
+      for(i=0;i<sumatoriaSize;i++){
+            cntSumatoria+=arregloSumatoria[i];
+      }
+}
+//Obtiene el producto de xy
+float producto(float arregloX,float arregloY,int sumatoriaSize){
+      int i;
+      float cntSumatoria=0.0;
+      for(i=0;i<sumatoriaSize;i++){
+            cntSumatoria+= arregloX*arregloY;
+      }
+}
+//Obtiene la sumatoria de valores al cuadrado
+float cuadrado(float arregloSumatoria,int sumatoriaSize){
+      int i;
+      float cntSumatoria=0.0;
+      for(i=0;i<sumatoriaSize;i++){
+            cntSumatoria+= arregloX*arregloY;
+      }
+}
+
 
 //Obtiene el promedio de varias lecturas
 float promedio(float arregloLecturas[],int lecturasSize){
       int i,cntCal=0;
 	float promedio;
 	for(i=0;i<lecturasSize;i++){
-		cntCal+=cntCal+arregloLecturas[i];
+		cntCal+=arregloLecturas[i];
 	}
 	promedio = cntCal/lecturasSize +.0;
 	return promedio;
@@ -150,17 +179,14 @@ void Exactitud(float arregloPatron[],int patronSize, float arregloLecturas[],int
       
 } 
 
-void Precision(float arregloPatron[],int patronSize,float arregloLecturas[],int lecturasSize){
-      float errorPrecision[100],precision[100];
-      int i;
-      for(i=0;i<patronSize;i++){
-            errorPrecision[i]=((arregloLecturas[i]-valorAlejado(arregloLecturas, lecturasSize))/arregloLecturas[i]);
-            if(errorPrecision[i]<0){
-                  errorPrecision[i]=errorPrecision[i]*-100;
-            }else{
-                  errorPrecision[i]=errorPrecision[i]*100;
-            }
-            precision[i]= 100 - errorPrecision[i];
-            printf("\nEl porcentaje de Precision del Valor Patron %.2f es %.2f. ",arregloPatron[i],precision[i]);
-      }
+float Precision(float arregloLecturas[],int lecturasSize, float promedio){
+      
+      float precision;
+
+      precision = fabs(((promedio-valorAlejado(arregloLecturas, lecturasSize))/promedio)*100);
+
+      precision = 100-precision;
+
+      return precision;
+
 }

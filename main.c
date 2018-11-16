@@ -14,7 +14,7 @@
     #define vL 100
     #define lPP 100
 
-    float mVP[vP], mVL[vL], mlPP[lPP],  mP[vP], mI[vP], prom , pres, incert;
+    float mVP[vP], mVL[vL], mlPP[lPP],  mP[vP], mI[vP], prom , pres, incert, varian, desvi;
     int numVP, numlPP, i, j, contaConsultas=0, contaMenu=0; 
     char vCorrectos;
 
@@ -74,13 +74,13 @@ int main()
 
                 //Muestra las matrices relacionadas VP y VLP
                     printf("\n\nIntroduciste los siguientes valores:    ");
-                    printf("\n\n\t|\t  V.Patrón \t|\t  L.Promedio \t|\t  P.Exactitud  \t|\t P.Presición  \t|\t  EE \t|\t  EP \t|");
+                    printf("\n\n\t|\t V.P \t|\t L.PL \t|\t P.E \t|\t P.P \t|\t EE \t|\t EP \t|\t Incert.\t|");
                     float patron, pPromedio, presci;
                 for(i=0; i<numVP; i++){
                     patron = mVP[i];
                     pPromedio = mVL[i];
                     presci = mP[i];
-                    printf("\n\n\t|\t  %.2f  \t|\t  %.2f \t|\t  %.2f \t |\t  %.2f \t|\t  %.2f \t |\t  %.2f \t |", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci);
+                     printf("\n\n\t|\t %.2f \t|\t %.2f \t|\t %.2f \t |\t %.2f \t|\t %.2f \t |\t %.2f \t|\t %.2f \t|", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci, incert);
                     
                 }
                 printf("\n\n");
@@ -265,11 +265,14 @@ void nuevaConsulta(void){
 
         prom = promedio(mlPP, numlPP);
         pres = Precision(mlPP, numlPP, prom);
-        incert = incertidumbre(mlPP, numlPP);
+        varian = varianza(mlPP, numlPP, prom);
+        desvi = desviacion(varian);
+        incert = incertidumbre(numlPP, desvi);
 
         //Llena el arreglo de lecturas promedio  por patrón
         mVL[j] = prom;   
-        mP[j] = pres;     
+        mP[j] = pres;  
+        mI[j] = incert;
 
         system(cleanScreen);
     }
@@ -281,13 +284,14 @@ void nuevaConsulta(void){
 
     //Muestra las matrices relacionadas VP y VLP
         printf("\n\nIntroduciste los siguientes valores:    ");
-        printf("\n\n\t|\t  V.Patrón \t|\t  L.Promedio \t|\t  P.Exactitud  \t|\t P.Presición  \t|\t  EE \t|\t  EP \t|");
+        printf("\n\n\t|\t V.Patrón \t|\t L.Promedio \t|\t P.Exactitud \t|\t P.Presición \t|\t EE \t|\t EP \t|\t Incert.\t|");
         float patron, pPromedio, presci;
     for(i=0; i<numVP; i++){
         patron = mVP[i];
         pPromedio = mVL[i];
         presci = mP[i];
-        printf("\n\n\t|\t  %.2f  \t|\t  %.2f \t|\t  %.2f \t |\t  %.2f \t|\t  %.2f \t |\t  %.2f \t |", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci);
+        incert = mI[i];
+        printf("\n\n\t|\t %.2f \t|\t %.2f \t|\t %.2f \t |\t %.2f \t|\t %.2f \t |\t %.2f \t |\t %.2f \t|", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci, incert);
         
     }
     printf("\n\n");

@@ -74,6 +74,9 @@ float producto(float arregloX[],float arregloY[],int sumatoriaSize);
 float cuadrado(float arregloSumatoria[],int sumatoriaSize);
 float Precision(float arregloLecturas[],int lecturasSize, float promedio);
 float Exactitud(float patron, float promedio);
+float varianza(float arregloLecturas[],int lecturasSize,float promedio);
+float desviacion(float varianza);
+float incertidumbre(int lecturasSize,float desviacion);
 
 /*    Funciones   */
 
@@ -112,14 +115,14 @@ float varianza(float arregloLecturas[],int lecturasSize,float promedio){
 	varianza= numVarianza/(lecturasSize-1)+0.0;
 	return varianza;
 }
-float desviacion(float calif[],int n){
+float desviacion(float varianza){
 	float desviacion;
-	desviacion = sqrt(varianza(calif,n));
+	desviacion = sqrt(varianza);
 	return desviacion;
 }
-float incertidumbre(float calif[],int n){
+float incertidumbre(int lecturasSize,float desviacion){
 	float incertidumbre;
-	incertidumbre = (desviacion(calif,n))/(sqrt(n))+0.0;
+	incertidumbre = (desviacion)/(sqrt(lecturasSize))+0.0;
 	return incertidumbre;
 }
 //Obtiene la pendiente

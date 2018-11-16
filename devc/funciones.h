@@ -74,6 +74,9 @@ float producto(float arregloX[],float arregloY[],int sumatoriaSize);
 float cuadrado(float arregloSumatoria[],int sumatoriaSize);
 float Precision(float arregloLecturas[],int lecturasSize, float promedio);
 float Exactitud(float patron, float promedio);
+float varianza(float arregloLecturas[],int lecturasSize,float promedio);
+float desviacion(float varianza);
+float incertidumbre(int lecturasSize,float desviacion);
 
 /*    Funciones   */
 
@@ -101,6 +104,26 @@ void llenarArreglo(float arreglo[], int arregloSize){
             scanf("%f", &arreglo[i]);
       }
 
+}
+//Calculo de incertidumbre.
+float varianza(float arregloLecturas[],int lecturasSize,float promedio){
+	int i;
+	float varianza,numVarianza;
+	for(i=0;i<lecturasSize;i++){
+		numVarianza+=pow(arregloLecturas[i]-promedio,2);
+	}
+	varianza= numVarianza/(lecturasSize-1)+0.0;
+	return varianza;
+}
+float desviacion(float varianza){
+	float desviacion;
+	desviacion = sqrt(varianza);
+	return desviacion;
+}
+float incertidumbre(int lecturasSize,float desviacion){
+	float incertidumbre;
+	incertidumbre = (desviacion)/(sqrt(lecturasSize))+0.0;
+	return incertidumbre;
 }
 //Obtiene la pendiente
 float pendiente(float arregloX[],float arregloY[],int sumatoriaSize){
@@ -130,14 +153,16 @@ float sumatoria(float arregloSumatoria[],int sumatoriaSize){
       for(i=0;i<sumatoriaSize;i++){
             cntSumatoria+=arregloSumatoria[i];
       }
+      return cntSumatoria;
 }
 //Obtiene el producto de xy
 float producto(float arregloX[],float arregloY[],int sumatoriaSize){
       int i;
       float cntSumatoria=0.0;
       for(i=0;i<sumatoriaSize;i++){
-            cntSumatoria+= arregloX[i]*arregloY[i];
+            cntSumatoria+= (arregloX[i])*(arregloY[i]);
       }
+      return cntSumatoria;
 }
 //Obtiene la sumatoria de valores al cuadrado
 float cuadrado(float arregloSumatoria[],int sumatoriaSize){
@@ -146,6 +171,7 @@ float cuadrado(float arregloSumatoria[],int sumatoriaSize){
       for(i=0;i<sumatoriaSize;i++){
             cntSumatoria+= pow(arregloSumatoria[i],2);
       }
+      return cntSumatoria;
 }
 
 

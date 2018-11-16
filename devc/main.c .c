@@ -14,7 +14,7 @@
     #define vL 100
     #define lPP 100
 
-    float mVP[vP], mVL[vL], mlPP[lPP],  mP[vP], prom , pres;
+    float mVP[vP], mVL[vL], mlPP[lPP],  mP[vP], mI[vP], prom , pres, incert, varian, desvi;
     int numVP, numlPP, i, j, contaConsultas=0, contaMenu=0; 
     char vCorrectos;
 
@@ -69,31 +69,31 @@ int main()
 
             if(contaConsultas>0){
 
-                //Te mostraremos los valores patrones y sus promedios
+                 //Te mostraremos los valores patrones y sus promedios
                 printf("\n\nTe mostraremos los último resultados");
 
                 //Muestra las matrices relacionadas VP y VLP
                     printf("\n\nIntroduciste los siguientes valores:    ");
-                    printf("\n\n\t| Valor Patrón | Lectura Promedio | Porcentaje Exactitud | Porcentaje Presición  | Error Exactitud | Error Precision |");
+                    printf("\n\n\t|\t V.P \t|\t L.PL \t|\t P.E \t|\t P.P \t|\t EE \t|\t EP \t|\t Incert.\t|");
                     float patron, pPromedio, presci;
                 for(i=0; i<numVP; i++){
                     patron = mVP[i];
                     pPromedio = mVL[i];
                     presci = mP[i];
-                    printf("\n\n\t| %.2f | %.2f | %.2f | %.2f | %.2f | %.2f |", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci);
+                     printf("\n\n\t|\t %.2f \t|\t %.2f \t|\t %.2f \t |\t %.2f \t|\t %.2f \t |\t %.2f \t|\t %.2f \t|", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci, incert);
                     
                 }
                 printf("\n\n");
-                
+
                 //Modelo Matemático
-			    printf("\n\nA continuación te mostraremos un modelo matemático como el siguiente: ");
-			    printf("\n\n\ty = mx + b");
-			    printf("\n\n\t\tDonde m = pendiente = sensibilidad");
-			    printf("\n\n\t\tDonde b = ordenada al origen = error aleatorio o experimental (+ -) ");
-			
-			    printf("\n\n\t La ecuacion es: y = (%.2f)x + (%.2f)",pendiente(mVP,mVL,numVP),ordenada(mVP,mVL,numVP));
-			
-			    system("pause");
+                printf("\n\nA continuación te mostraremos un modelo matemático como el siguiente: ");
+                printf("\n\n\ty = mx + b");
+                printf("\n\n\t\tDonde m = pendiente = sensibilidad");
+                printf("\n\n\t\tDonde b = ordenada al origen = error aleatorio o experimental (+ -) ");
+
+                printf("\n\n\t La ecuacion es: y = (%.2f)x + (%.2f)",pendiente(mVP,mVL,numVP),ordenada(mVP,mVL,numVP));
+                printf("\n\n");
+                system("pause");
 
             }else {
                 printf("\n\nParece que no has hecho ninguna consulta anteriormente, intenta a realizar una consulta antes\n\n");
@@ -265,10 +265,14 @@ void nuevaConsulta(void){
 
         prom = promedio(mlPP, numlPP);
         pres = Precision(mlPP, numlPP, prom);
+        varian = varianza(mlPP, numlPP, prom);
+        desvi = desviacion(varian);
+        incert = incertidumbre(numlPP, desvi);
 
         //Llena el arreglo de lecturas promedio  por patrón
         mVL[j] = prom;   
-        mP[j] = pres;     
+        mP[j] = pres;  
+        mI[j] = incert;
 
         system(cleanScreen);
     }
@@ -280,13 +284,14 @@ void nuevaConsulta(void){
 
     //Muestra las matrices relacionadas VP y VLP
         printf("\n\nIntroduciste los siguientes valores:    ");
-        printf("\n\n\t| Valor Patrón | Lectura Promedio | Porcentaje Exactitud | Porcentaje Presición  | Error Exactitud | Error Precision |");
+        printf("\n\n\t|\t V.Patrón \t|\t L.Promedio \t|\t P.Exactitud \t|\t P.Presición \t|\t EE \t|\t EP \t|\t Incert.\t|");
         float patron, pPromedio, presci;
     for(i=0; i<numVP; i++){
         patron = mVP[i];
         pPromedio = mVL[i];
         presci = mP[i];
-        printf("\n\n\t| %.2f | %.2f | %.2f | %.2f | %.2f | %.2f |", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci);
+        incert = mI[i];
+        printf("\n\n\t|\t %.2f \t|\t %.2f \t|\t %.2f \t |\t %.2f \t|\t %.2f \t |\t %.2f \t |\t %.2f \t|", patron, pPromedio, Exactitud(patron, pPromedio), presci, 100 - Exactitud(patron, pPromedio), 100 - presci, incert);
         
     }
     printf("\n\n");
@@ -296,10 +301,10 @@ void nuevaConsulta(void){
     printf("\n\nA continuación te mostraremos un modelo matemático como el siguiente: ");
     printf("\n\n\ty = mx + b");
     printf("\n\n\t\tDonde m = pendiente = sensibilidad");
-    printf("\n\n\t\tDonde b = ordenada al origen = erro aleatorio o experimental (+ -) ");
+    printf("\n\n\t\tDonde b = ordenada al origen = error aleatorio o experimental (+ -) ");
 
-    printf("\n\n\t La ecuacion es: y = (%.2f)x + (%.2f)",pendiente(mVP,mVL,numVP),ordenada(mVP,mVL,numVP));
-
+    printf("\n\n\t La ecuacion es: y = (%.2f)x + (%.2f)", pendiente(mVP,mVL,numVP),ordenada(mVP,mVL,numVP));
+    printf("\n\n");
     system("pause");
 
 

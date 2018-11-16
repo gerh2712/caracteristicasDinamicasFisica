@@ -61,6 +61,7 @@ INCERTIDUMBRE
             n = numero de lecturas
 
 */
+#include    <locale.h>
 #define cleanScreen "cls"
 
 /*    Prototipo de funciones  */
@@ -109,6 +110,7 @@ float pendiente(float arregloX[],float arregloY[],int sumatoriaSize){
       sumatoriaXY= producto(arregloX,arregloY,sumatoriaSize);
       sumatoriaX2= cuadrado(arregloX,sumatoriaSize);
       pendiente=(((sumatoriaSize*sumatoriaXY)-(sumatoriaX*sumatoriaY))/((sumatoriaSize*sumatoriaX2)-(pow(sumatoriaX,2))));
+      return pendiente;
 }
 //Obtiene la ordenada
 float ordenada(float arregloX[],float arregloY[],int sumatoriaSize){
@@ -119,6 +121,7 @@ float ordenada(float arregloX[],float arregloY[],int sumatoriaSize){
       sumatoriaX2= cuadrado(arregloX,sumatoriaSize);
       m= pendiente(arregloX,arregloY,sumatoriaSize);
       ordenada=(((sumatoriaY)-(m*sumatoriaX))/(sumatoriaSize));
+      return ordenada;
 }
 //Obtiene la sumatoria
 float sumatoria(float arregloSumatoria[],int sumatoriaSize){

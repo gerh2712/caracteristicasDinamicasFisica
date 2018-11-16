@@ -273,14 +273,14 @@ void nuevaConsulta(void){
 
     //Muestra las matrices relacionadas VP y VLP
         printf("\n\nIntroduciste los siguientes valores:    ");
-        printf("\n\n\t| Valor Patrón | Lectura Promedio | Porcentaje Exactitud | Porcentaje Presición  | Error Exactitud | Error Precision |");
+        printf("\n\n\t|\tValor Patrón\t|\tLectura Promedio\t|\tPorcentaje Exactitud\t|\tPorcentaje Presición\t|\tError Exactitud\t|\tError Precision\t|");
         float patron, pPromedio, presci, exact;
     for(i=0; i<numVP; i++){
         patron = mVP[i];
         pPromedio = mVL[i];
         presci = mP[i];
         exact = Exactitud(patron, pPromedio);
-        printf("\n\n\t| %.2f | %.2f | %.2f | %.2f | %.2f | %.2f |", patron, pPromedio, exact, presci, (100 - exact), (100 - presci));
+        printf("\n\n\t|\t%.2f\t|\t%.2f\t|\t%.2f\t|\t%.2f\t|\t%.2f\t|\t%.2f\t|", patron, pPromedio, exact, presci, (100 - exact), (100 - presci));
     }
     printf("\n\n");
 
